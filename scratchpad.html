@@ -6,14 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scratchpad: Ideas and Thoughts</title>
     <style>
+        /*H1 is my selector
+            solor:green is my declaration
+            'color' is my prperty
+            'green' is my value.
+            ';' terminates a rule/statement. */
+        h1:first-child {
+            text-align: center;
+
+            color: green;
+        }
+
+        /* h1: first-child is a tagname and a pseudo class. This matches all h1 elements that also happen to be the first element in another element*/
+        h1:hover {
+            text-align: center;
+            color: orange;
+        }
+
         h1 {
-            color: transparent;
+            text-align: center
+        }
+
+        /*color: transparent;
             transition: all 1s;
             background: linear-gradient(to right, red, green, blue, orange, yellow, pink, purple, black);
             background-size: 300%;
             background-clip: text;
-            animation: magic 3s linear infinite;
-        }
+            animation: magic 3s linear infinite; */
 
         h1:hover {
             transform: scale(2);
@@ -33,9 +52,8 @@
 </head>
 
 <body>
-    <h1> Hello World </h1>
-    <a> This is Epic </a>
-    <p bgcolor="blue"> Welcome to my site</p>
+    <h1 id="pagetitle"> Hello World </h1>
+    <h1> This is Epic! </h1>
 </body>
 
 </html>
