@@ -1,18 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Trinitas Code Club</title>
   <meta name="description" content="Freshmen learning web development at Trinitas Christian School">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
+  <style type="barf" ?>
     /* Add your CSS styling here */
+    /*
+    = - this matches the whole value
+    ^ - this matches the start of the value
+    $ - this matches the end of the value
+    */
     section {
       border-left:10px solid green;
       border-right: 10px dotted red;}
   </style>
+  <style>
+    #crest {
+      max-width: 100px;
+      position: sticky;
+      top: 20px;
+      z-index: 1;
+    }
+
+    main {
+      transition:all 1s;
+      padding: 1em 2em;
+      margin-left: 1em;
+      margin-right: 1em;
+      border: 1px solid black;
+      border-radius: 100em;
+      /* overflow: hidden; */
+      background-color: orange;
+      box-shadow: 5px 5px purple,
+        10px 10px teal,
+        15px 15px black;
+        filter: grayscale(1)
+    }
+    
+    main:hover {
+      opacity: 1;
+      transform: scale(1) rotate(-1000000deg);
+      filter: grayscale(0);
+
+
+    }
+  </style>
 </head>
+
 <body>
+  <img id="crest" src="images/Crest.png" alt="School Photo" />
   <header>
     <h1>Trinitas Code Club</h1>
     <nav>
@@ -29,7 +68,9 @@
   <main>
     <section id="about">
       <h2>About the Club</h2>
-      <p>The Trinitas Code Club is a group of Freshmen students learning to build websites and programs from scratch. Using HTML, CSS, and JavaScript, these students explore how the web works—and how to create their own part of it.</p>
+      <p>The Trinitas Code Club is a group of Freshmen students learning to build websites and programs from scratch.
+        Using HTML, CSS, and JavaScript, these students explore how the web works—and how to create their own part of
+        it.</p>
     </section>
 
     <section id="topics">
@@ -45,19 +86,25 @@
 
     <section id="logic">
       <h2>Logic & Programming</h2>
-      <p>Programming is built on the foundation of logic. Just as formal Logic teaches students how to reason with clarity and structure, programming trains the mind to solve problems methodically. Writing code is like creating a set of instructions that must be perfectly logical—computers don’t guess, they do exactly what you tell them.</p>
-      <p>This class connects classical education with modern skills, allowing students to apply what they know about logical inference, patterns, and structure to build real-world tech.</p>
+      <p>Programming is built on the foundation of logic. Just as formal Logic teaches students how to reason with
+        clarity and structure, programming trains the mind to solve problems methodically. Writing code is like creating
+        a set of instructions that must be perfectly logical—computers don’t guess, they do exactly what you tell them.
+      </p>
+      <p>This class connects classical education with modern skills, allowing students to apply what they know about
+        logical inference, patterns, and structure to build real-world tech.</p>
     </section>
 
     <section id="projects">
       <h2>Student Projects</h2>
       <article class="project-card" data-category="web">
         <h3>“Gods of Code” Character Arena</h3>
-        <p>A text-based battle game where each student creates a JavaScript-powered profile inspired by a figure from Greek mythology. The characters face off in a logic-driven tournament.</p>
+        <p>A text-based battle game where each student creates a JavaScript-powered profile inspired by a figure from
+          Greek mythology. The characters face off in a logic-driven tournament.</p>
       </article>
       <article class="project-card" data-category="design">
         <h3>Responsive Portfolio Pages</h3>
-        <p>Students designed their own web portfolios using Flexbox and Grid, showcasing what they've learned in both structure and design principles.</p>
+        <p>Students designed their own web portfolios using Flexbox and Grid, showcasing what they've learned in both
+          structure and design principles.</p>
       </article>
       <article class="project-card" data-category="tooling">
         <h3>Browser Extension: Trinitas Tracker</h3>
@@ -70,17 +117,21 @@
     <h2>Developer Highlights</h2>
     <article>
       <h3>Why Learn to Code?</h3>
-      <p>Code powers everything from video games and mobile apps to scientific research and financial systems. Learning to code gives students the ability to create, not just consume, the digital world.</p>
+      <p>Code powers everything from video games and mobile apps to scientific research and financial systems. Learning
+        to code gives students the ability to create, not just consume, the digital world.</p>
     </article>
     <article>
       <h3>Design Matters</h3>
-      <p>CSS isn’t just about color and fonts—it’s about clarity, accessibility, and experience. Students learn how thoughtful design enhances usability and communicates purpose.</p>
+      <p>CSS isn’t just about color and fonts—it’s about clarity, accessibility, and experience. Students learn how
+        thoughtful design enhances usability and communicates purpose.</p>
     </article>
   </aside>
 
   <footer>
-    <p>Questions? Want to get involved? Contact the instructor at <a href="mailto:codeclub@trinitaschristian.org">codeclub@trinitaschristian.org</a></p>
+    <p>Questions? Want to get involved? Contact the instructor at <a
+        href="mailto:codeclub@trinitaschristian.org">codeclub@trinitaschristian.org</a></p>
     <p>&copy; 2025 Trinitas Code Club. Built with logic and style.</p>
   </footer>
 </body>
+
 </html>
