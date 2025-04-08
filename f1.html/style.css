@@ -1,0 +1,205 @@
+/* We start by defining some variables. We'll use these values throughout
+   our CSS, so it's nice to have this much control from one spot. We can
+   easily change the road width, its bumpiness, the color of our lines,
+   and more. By wrapping these in :root { ... }, we specify a "scope" for
+   the variables, meaning where they apply. Because we put them in the
+   :root selector, the variables apply to the root document, which is the
+   <html> element, and everything inside of it. */
+   :root {
+    --road-width: 800px;
+    --road-color: #333;
+    --road-bumpiness: 2px;
+    --car-height: calc(50vh);
+    --car-width: calc(var(--car-height) * 1.25);
+    --line-width: calc(var(--road-width) / 35);
+    --line-height: calc(var(--line-width) * 10);
+    --line-color: rgba(255, 255, 255, 0.5);
+  }
+  
+  main {
+    /* Positioning */
+    position: fixed; z-index: 10;
+    top: 30px; left: 30px;
+    max-height: 60vh; width: 35vw;
+  
+    /* Box model */
+    box-sizing: border-box;
+    padding: 1em 2em;
+    border: 1em solid transparent;
+    border-radius: 1em;
+  
+    /* Visuals */
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+    color: white;
+    font-family: cursive;
+  
+    /* Scrollbar */
+    overflow-y: scroll;
+    scrollbar-color: white transparent;
+    scrollbar-width: thin;
+  }
+  
+  body {
+    /* The "overflow" property controls how the body element responds to
+       elements being too wide or too tall to fully display. Normally a set
+       of scrollbars might be added, but by setting the value to "hidden", we
+       instruct the browser to ignore any content that can't be shown, and to
+       NOT add scrollbars. */
+    overflow: hidden;
+    
+    &::after {
+      content: ""; position: absolute; z-index: 8;
+      background: linear-gradient(-125deg, black, transparent);
+      top: 0; right: 0; left: 0; bottom: 0;
+    }
+  }
+  
+  #sky {
+    /* Positioning & dimensions */
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 50vh;
+  
+    /* Visuals */
+    background: lightblue;
+  
+    /* We use a pseudo-element (which exists for almost every element) to create
+       a subtle gradient. By making this the same size as our sky element, it gives
+       the impression of depth. */
+    &::after {
+      content: "";
+      position: absolute; z-index: 2;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent);
+    }
+  }
+  
+  #ground {
+    /* Positioning & dimensions */
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 50vh;
+  
+    /* Visuals */
+    background: green;
+  
+    /* We use the same approach as above, for the sky, here on the ground. */
+    &::after {
+      content: "";
+      position: absolute; z-index: 3;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), transparent);
+    }
+  }
+  
+  #car {
+    /* Positioning & size */
+    position: absolute;
+    bottom: 0;
+    left: calc(50% - var(--car-width) / 2);
+    width: var(--car-width);
+    height: var(--car-height);
+  
+    /* Animations */
+    animation:
+      rumble 0.1s linear infinite,
+      speedup_slowdown 12.5s ease-in-out infinite,
+      steer_left_right 2.68s ease-in-out infinite alternate;
+  }
+  
+  @keyframes rumble {
+    /* This keyframe set gives the car its bumpiness effect. We update
+       the y-position of the car half-way through the animation, and we
+       reset it to 0 at the start and finish of the animation. We use
+       the "translate" property which takes two values: x and y position. */
+    0%, 100% { translate: 0 0 }
+    50% { translate: 0 var(--road-bumpiness) }
+  }
+  
+  @keyframes speedup_slowdown {
+    /* At the start and finish (i.e., 0% and 100%) of our animation, we want
+       the car to be about 150px out of view, cutting off the bottom-part of
+       the car. At 50% of the animation, we want the car higher, and smaller,
+       so that it appears to be further down the road. */
+    0%, 100% {
+      bottom: calc(-0.25 * var(--car-height));
+    }
+    50% {
+      scale: 0.55;
+      bottom: calc(50vh - calc(var(--car-height) * 0.7));
+    }
+  }
+  
+  @keyframes steer_left_right {
+    /* This animation is responsible for moving the car left and right.
+       It starts by setting the "left" position to 50vw. Remember that
+       "vw" stands for "viewport width", or roughly 1% of the screen's
+       width. So 50vw is about 50% of the screen width. If we set the
+       left position to 50vw, we position the car so that it is just
+       to the right of the center line. We alternate between 50vw, and
+       whatever 50vw - --car-width is, placing the car on the left of
+       the center line. We also skew the shape of the car as it moves
+       from one side to the other. */
+    0% {
+      left: 50vw;
+      transform: skew(15deg);
+    }
+    100% {
+      left: calc(50vw - var(--car-width));
+      transform: skew(-15deg);
+    }
+  }
+  
+  #road {
+    /* Positioning & layout */
+    position: absolute;
+    top: 50%;
+    left: calc((100vw - var(--road-width))/2);
+    width: var(--road-width);
+    height: 70vh;
+    overflow: hidden;
+  
+    /* Visuals & transform */
+    background: var(--road-color);
+    background-image: linear-gradient(to right,
+      transparent 5%,
+      var(--line-color) 5%, var(--line-color) 7%,
+      transparent 7%, transparent 93%,
+      var(--line-color) 93%, var(--line-color) 95%,
+      transparent 95%
+    );
+    transform-origin: center top;
+    transform: perspective(300px) rotateX(65deg);
+    box-shadow:
+      5px 0 0 rgba(255, 255, 255, 0.1),
+      -5px 0 0 rgba(0, 0, 0, 0.5);
+  
+    /* Notice how this #line selector is inside the styles for the #road selector.
+       This is what's called a "nested selector," meaning the selector is nested within
+       another selector. Because #line is declared inside #road, it's the same as if we
+       had used a "#road #line" selector instead. */
+    #line {
+      /* Positioning & dimensions */
+      position: absolute;
+      top: 0;
+      left: calc((var(--road-width) - var(--line-width)) / 2);
+      width: var(--line-width);
+      height: var(--line-height);
+  
+      /* Visuals & animation */
+      background: var(--line-color);
+      animation: drive_forward 0.5s linear infinite;
+    }
+  }
+  
+  @keyframes drive_forward {
+    /* I'm using the calc function, multiplying the line height by -1 to get the opposite.
+       So if the line height is 100px, we get -100px, and that is where the animation starts.
+       This causes the animation to start with the line above (i.e., out of view) the road.
+       In this case, we used "from" instead of "0%" and "to" instead of "100%". You can use
+       these helpful aliases when it makes sense. */
+    from { top: calc(-1 * var(--line-height)) }
+    to { top: 100% }
+  }
