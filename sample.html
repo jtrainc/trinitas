@@ -24,13 +24,32 @@
       top: 20px;
       z-index: 1;
     }
-    body {
-      --favorite_color: purple;
-    }
-    footer {
-      color: var(--favorite_color);
+/* Default styles here*/
+    
+:root {
+  /* light theme vars*/
+  --color-one: black;
+  --color-two: white;
+}
+
+body {
+      background-color: var(--color-one);
+      color: var(--color-two);
     }
 
+    /* Two conditions for overriding the styles*/
+    @media (prefers-color-scheme: dark) and (min-width: 800px) {
+      body {
+
+        color: var(--color-one);
+        background-color: var(--color-two);
+      }
+    }
+
+    /*footer {
+      color: var(--favorite_color);
+    }
+*/
     main {
       transition: all 1s;
       padding: 1em 2em;
@@ -48,7 +67,8 @@
 
     main:hover {
       opacity: 1;
-      transform: scale(1) rotate(-1000000deg);
+      transition-duration: 100000000s;
+      transform: scale(1) rotate(1234567890deg);
       filter: grayscale(0);
     }
   </style>
