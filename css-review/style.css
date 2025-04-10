@@ -1,0 +1,25 @@
+
+#funnybox {
+    --on-size: 2em;
+    --off-size: 1em;
+}
+
+
+
+#box {
+    width: var(--off-size);
+    height: var(--off-size);
+    border: 1px solid green;
+    background: transparent;
+    transition: all 2s;
+}
+
+#zoom:checked + #box {
+    width: 400px;
+    height: 400px;
+    border: 2px solid black;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../images/trinitas-code-club-jackson.png);
+}
