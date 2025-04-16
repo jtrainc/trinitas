@@ -25,6 +25,10 @@ while (userAnswer != "gay" && tries > 0) {
 if (userAnswer == "gay") {
     h2.hidden = false;
 }
+else {
+    h2.textContent = "This is fake, replacement content.";
+    h2.hidden = false;
+}
 
 // Update our clock once every second
 setInterval(setTime, 1_000);
@@ -39,4 +43,22 @@ function setTime() {
 
 function renderTime() {
     el.textContent = timevalue;
+}
+
+//setup trakcing eyes!
+const eyes = document.querySelectorAll(".eye");
+//listen to user mouse movements
+document.addEventListener("mousemove", updateEyes);
+
+function updateEyes(event) {
+    for (const eye of eyes) {
+        const pupil = eye.querySelector(".pupil");
+        const shape = eye.getBoundingClientRect();
+        const dx = event.clientX - (shape.left + shape.width / 2);
+        const dy = event.clientY - (shape.top + shape.height / 2);
+        const angle = Math.atan2(dy, dx);
+        const x = Math.cos(angle) * 10;
+        const y = Math.sin(angle) * 10;
+        pupil.style.transform = `translate(${x}px, ${y}px)`;
+    }
 }
