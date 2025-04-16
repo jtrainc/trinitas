@@ -15,14 +15,14 @@ let timevalue;
 
 // Can the use see our secret content?
 let tries = 10;
-let userAnswer = prompt("What is the secret message?");
+let userAnswer = prompt("What is the secret password?");
 
-while (userAnswer != "please" && tries > 0) {
+while (userAnswer != "gay" && tries > 0) {
     alert("Wrong. Try again. You have " + tries + " attempts remaining.");
-    userAnswer = prompt("What is the secret message?");
+    userAnswer = prompt("What is the secret password?");
     tries = tries - 1;
 }
-if (userAnswer == "please") {
+if (userAnswer == "gay") {
     h2.hidden = false;
 }
 
