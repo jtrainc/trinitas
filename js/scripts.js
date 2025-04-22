@@ -5,9 +5,9 @@ function promptUser() {
     const el = document.querySelector("#currenttime");
     const username = prompt("What is your name, traveler?");
 
-    
-    
-        //Types of values
+
+
+    //Types of values
     let string_type = "Hello";
 
     //We are going to change this value at least once more
@@ -61,15 +61,53 @@ function promptUser() {
     }
 }
 
-function say (phrase) {
+function say(phrase) {
     const utterance = new SpeechSynthesisUtterance(phrase);
     utterance.rate = 5
     speechSynthesis.speak(utterance)
 }
 
-    const speakButton = document.querySelector("#sayPhrase");
-    const phraseInput = document.querySelector("#phrase");
-    
-    speakButton.addEventListener("click", function () {
-        console.log("Testing");
-        say(phraseInput.value);});
+const speakButton = document.querySelector("#sayPhrase");
+const phraseInput = document.querySelector("#phrase");
+
+speakButton.addEventListener("click", function () {
+    console.log("Testing");
+    say(phraseInput.value);
+});
+
+function say_phrase(phrase) {
+    const utterance = new SpeechSynthesisUtterance(phrase);
+    speechSynthesis.speak(utterance);
+}
+//this is a function called "logical fallies". It has two paramaters: the first of which is the appeal to athority example, and the second is the num of times to print.
+function logical_fallicies(appeal_to_athority_example, num_of_times_to_print) {
+    for (let i = 0; i < num_of_times_to_print; i++) {
+        console.log("An example of an appeal to athority is: " + appeal_to_athority_example);
+    }
+}
+
+logical_fallicies("Listen to me, for I have the badge of green justice!", 3);
+const phrases = [
+    "Hello, world",
+    What is your name ? "
+    Do you like pizza ? "
+    Because you can not be my friend if you don't like pizza."
+];
+
+function printPhrasesToPage(inputPhrase) {
+    //this is a "for... of" (as opposed to "for...in") loop.
+    for (const phrase of inputPhrases) {
+        const listItem = document.createElement("li")
+        //methods are functions that belong to objects (e.g. Math.random())
+        listItem.textContent = phrase + " " + Math.floor(800 * Math.random());
+        document.body.append(listItem);
+    }
+}
+printPhrasesToPage(["Jon Anthony", "Brandon Jansky", "Jackson Cowart"]);
+
+
+//This is a function named "foo"; it has no arguments (i.e., the parens have nothing between them). It's body is everything within the opening and closign curly braces (i.e., {and}).
+const foo2 = () => {
+    phrases.forEach(say_phrase);
+}
+const foo 
