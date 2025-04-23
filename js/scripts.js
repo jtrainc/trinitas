@@ -63,8 +63,9 @@ function promptUser() {
 
 function say(phrase) {
     const utterance = new SpeechSynthesisUtterance(phrase);
-    utterance.rate = 5
+    utterance.rate = 1.5
     speechSynthesis.speak(utterance)
+    accent
 }
 
 const speakButton = document.querySelector("#sayPhrase");
@@ -79,35 +80,60 @@ function say_phrase(phrase) {
     const utterance = new SpeechSynthesisUtterance(phrase);
     speechSynthesis.speak(utterance);
 }
-//this is a function called "logical fallies". It has two paramaters: the first of which is the appeal to athority example, and the second is the num of times to print.
-function logical_fallicies(appeal_to_athority_example, num_of_times_to_print) {
-    for (let i = 0; i < num_of_times_to_print; i++) {
-        console.log("An example of an appeal to athority is: " + appeal_to_athority_example);
+// //this is a function called "logical fallies". It has two paramaters: the first of which is the appeal to athority example, and the second is the num of times to print.
+// function logical_fallicies(appeal_to_athority_example, num_of_times_to_print) {
+//     for (let i = 0; i < num_of_times_to_print; i++) {
+//         console.log("An example of an appeal to athority is: " + appeal_to_athority_example);
+//     }
+// }
+
+// logical_fallicies("Listen to me, for I have the badge of green justice!", 3);
+// const phrases = [
+//     "Hello, world",
+//     What is your name ? "
+//     Do you like pizza ? "
+//     Because you can not be my friend if you don't like pizza."
+// ];
+
+// function printPhrasesToPage(inputPhrase) {
+//     //this is a "for... of" (as opposed to "for...in") loop.
+//     for (const phrase of inputPhrases) {
+//         const listItem = document.createElement("li")
+//         //methods are functions that belong to objects (e.g. Math.random())
+//         listItem.textContent = phrase + " " + Math.floor(800 * Math.random());
+//         document.body.append(listItem);
+//     }
+// }
+// printPhrasesToPage(["Jon Anthony", "Brandon Jansky", "Jackson Cowart"]);
+
+
+// //This is a function named "foo"; it has no arguments (i.e., the parens have nothing between them). It's body is everything within the opening and closign curly braces (i.e., {and}).
+// const foo2 = () => {
+//     phrases.forEach(say_phrase);
+// }
+// const foo 
+
+const synth = window.speechSynthesis;
+
+const inputForm = document.querySelector("form");
+const inputTxt = document.querySelector("input");
+const voiceSelect = document.querySelector("select");
+
+const voices = synth.getVoices();
+
+// ...
+
+inputForm.onsubmit = (event) => {
+  event.preventDefault();
+
+  const utterThis = new SpeechSynthesisUtterance(inputTxt.value);
+  const selectedOption =
+    voiceSelect.selectedOptions[0].getAttribute("data-name");
+  for (let i = 0; i < voices.length; i++) {
+    if (voices[i].name === selectedOption) {
+      utterThis.voice = voices[i];
     }
-}
-
-logical_fallicies("Listen to me, for I have the badge of green justice!", 3);
-const phrases = [
-    "Hello, world",
-    What is your name ? "
-    Do you like pizza ? "
-    Because you can not be my friend if you don't like pizza."
-];
-
-function printPhrasesToPage(inputPhrase) {
-    //this is a "for... of" (as opposed to "for...in") loop.
-    for (const phrase of inputPhrases) {
-        const listItem = document.createElement("li")
-        //methods are functions that belong to objects (e.g. Math.random())
-        listItem.textContent = phrase + " " + Math.floor(800 * Math.random());
-        document.body.append(listItem);
-    }
-}
-printPhrasesToPage(["Jon Anthony", "Brandon Jansky", "Jackson Cowart"]);
-
-
-//This is a function named "foo"; it has no arguments (i.e., the parens have nothing between them). It's body is everything within the opening and closign curly braces (i.e., {and}).
-const foo2 = () => {
-    phrases.forEach(say_phrase);
-}
-const foo 
+  }
+  synth.speak(utterThis);
+  inputTxt.blur();
+};
