@@ -14,7 +14,6 @@ export default class Tank extends Automobile {
         super(opts);
 
         this.rounds = opts.rounds;
-
         console.log("Your tank is alive?");
     }
 }

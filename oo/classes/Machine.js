@@ -33,8 +33,15 @@ export default class Machine {
         this.element.style.backgroundColor = this.color;
         this.element.style.width = "30px";
         this.element.style.height = "10px";
+        this.element.style.position = "absolute";
         this.element.style.transform = "rotate(" + this.angle + "rad)";
 
         document.body.appendChild(this.element);
+    }
+
+    update() {
+
+        this.element.style.left = this.location.x + "px";
+
     }
 }
