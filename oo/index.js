@@ -18,7 +18,12 @@ function setupKeyBinding () {
         if (event.code == "KeyW"){
             armyTank.driveForward();
             armyTank.update();
-            console.log(armyTank.location.x);
+        }
+    }
+    function handleKeyDown (event) {
+        if (event.code == "KeyS") {
+            armyTank.driveBackward();
+            armyTank.update();
         }
     }
 
