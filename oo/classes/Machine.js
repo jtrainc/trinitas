@@ -22,6 +22,7 @@ export default class Machine {
         this.color = opts.color;
         this.element = opts.element;
         this.angle = opts.angle;
+        this.render();
     }
 
     render() {
@@ -42,6 +43,6 @@ export default class Machine {
     update() {
 
         this.element.style.left = this.location.x + "px";
-
-    }
-}
+        this.element.style.top = this.location.y + "px";
+        this.element.style.transform = "rotate(" + this.angle + "rad)";}
+    };
