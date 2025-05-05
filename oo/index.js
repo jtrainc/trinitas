@@ -1,42 +1,55 @@
 import Tank from "./classes/Tank.js";
 
-const armyTank = new Tank({ rounds: 5, color: "green"});
+const armyTank = new Tank({ rounds: 5, color: "green" });
 const pinkTank = new Tank({ color: "pink" })
 
 armyTank.render();
+pinkTank.render();
 
-function setupKeyBinding () {
+const pressedKeys = {
+    "KeyA": false,
+    "KeyS": false,
+    "KeyD": false,
+    "KeyW": false,
+    "ArrowUp": false,
+    "ArrowDown": false,
+    "ArrowLeft": false,
+    "ArrowRight": false,
+};
 
-    // function handleKeyUp (event) {
-    //     console.log(event.code);
-    // }
-    function handleKeyDown (event) {
-        console.log(event.code);
-        if (event.code == "KeyW"){
-            armyTank.driveForward();
-            armyTank.update();
-            console.log(armyTank.location.x);
-        }
-        else (event.code == "KeyD") 
-            armyTank.turnRight();
-            armyTank.update();
-            console.log(armyTank.location.x);
-        }
+function update() {
+    // If the user is pressing W or ArrowUp
+    if (pressedKeys.KeyW || pressedKeys.ArrowUp) {
+        armyTank.driveForward();
+        pinkTank.driveForward();
     }
-    function handleKeyDown (event) {
-        console.log(event.code);
-        if (event.code === "KeyS") {
-            armyTank.driveBackward();
-            armyTank.update();
-            console.log(armyTank.location.x);
-        }
-        else if (event.code == "KeyA") {
-            armyTank.turnLeft();
-            armyTank.update();
-            console.log(armyTank.location.x); 
+    else if (pressedKeys.KeyS || pressedKeys.ArrowDown) {
+        armyTank.driveBackward();
+        pinkTank.driveForward();
     }
+    if (pressedKeys.KeyA || pressedKeys.ArrowLeft) {
+        armyTank.turnLeft();
+        pinkTank.driveForward();
     }
-    // document.addEventListener("keyup", handleKeyUp);
-    document.addEventListener("keydown", handleKeyDown);
+    else if (pressedKeys.KeyD || pressedKeys.ArrowRight) {
+        armyTank.turnRight();
+        pinkTank.driveForward();
+    }
+    armyTank.update();
+    pinkTank.update();
+    requestAnimationFrame(update);
+}
 
-setupKeyBinding();
+update();
+
+document.addEventListener("keydown", (event) => {
+    if (event.code in pressedKeys) {
+        pressedKeys[event.code] = true;
+    }
+});
+
+document.addEventListener("keyup", (event) => {
+    if (event.code in pressedKeys) {
+        pressedKeys[event.code] = false;
+    }
+});
