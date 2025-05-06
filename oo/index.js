@@ -25,15 +25,15 @@ function update() {
     }
     else if (pressedKeys.KeyS || pressedKeys.ArrowDown) {
         armyTank.driveBackward();
-        pinkTank.driveForward();
+        pinkTank.driveBackward();
     }
     if (pressedKeys.KeyA || pressedKeys.ArrowLeft) {
         armyTank.turnLeft();
-        pinkTank.driveForward();
+        pinkTank.turnLeft();
     }
     else if (pressedKeys.KeyD || pressedKeys.ArrowRight) {
         armyTank.turnRight();
-        pinkTank.driveForward();
+        pinkTank.turnRight();
     }
     armyTank.update();
     pinkTank.update();

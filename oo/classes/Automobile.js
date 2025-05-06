@@ -24,25 +24,26 @@ export default class Automobile extends Machine {
     }
 
     driveForward() {
-        const newX = Math.cos(this.angle) * this.moveSpeed;
-        const newY = Math.sin(this.angle) * this.moveSpeed;
-        this.location.x = Math.min(innerWidth, newX);
-        this.location.y = Math.min(innerHeight, newY);
+        const newX = this.location.x + Math.cos(this.angle) * this.moveSpeed;
+        const newY = this.location.y + Math.sin(this.angle) * this.moveSpeed;
+        this.location.x += this.moveSpeed * Math.cos(this.angle);
+        this.location.y += this.moveSpeed * Math.sin(this.angle);
     }
 
     
     driveBackward() {
-        this.location.x -= Math.cos(this.angle) * this.moveSpeed;
-        this.location.y -= Math.sin(this.angle) * this.moveSpeed;
+        this.location.x -= this.moveSpeed * Math.cos(this.angle);
+        this.location.y -= this.moveSpeed * Math.sin(this.angle);
     }
 
     turnLeft() {
-        this.angle = this.angle - this.turnSpeed;
+        this.angle -= this.turnSpeed;
     }
 
     turnRight() {
-        this.angle = this.angle + this.turnSpeed;
+        this.angle += this.turnSpeed;
     }
+
 
     startMovement() {
         const moveAndSpin = () => {
