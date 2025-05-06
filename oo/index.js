@@ -1,3 +1,4 @@
+import Projectile from "./classes/Projectile.js";
 import Tank from "./classes/Tank.js";
 
 const armyTank = new Tank({ rounds: 5, color: "green" });
@@ -43,6 +44,14 @@ function update() {
 update();
 
 document.addEventListener("keydown", (event) => {
+    
+    if ( event.code == "Space" ) {
+        // armyTank.shoot();
+        new Projectile({
+             x: Math.random() * innerWidth,
+             y: Math.random() * innerHeight,
+        });
+    }
     if (event.code in pressedKeys) {
         pressedKeys[event.code] = true;
     }
